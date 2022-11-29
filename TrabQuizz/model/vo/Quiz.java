@@ -65,4 +65,13 @@ public class Quiz {
         ranking = rkg.getBD();
         return ranking;
     }
+    
+    public boolean compareNick(String nick) {
+        ranking = rkg.getBDs();
+        for (Ranking r: ranking) {
+            if (nick.equals(r.getNick()) && Quiz.score > r.getScores())
+                return true;
+        }
+        return false;
+    }
 }

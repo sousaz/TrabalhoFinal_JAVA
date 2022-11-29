@@ -25,6 +25,7 @@ public class TelaFinal extends javax.swing.JFrame {
         jTextField2.setText(txt);
     }
     private RankingDAO rk = new RankingDAO();
+    private Quiz quiz = new Quiz();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,23 +85,21 @@ public class TelaFinal extends javax.swing.JFrame {
                 .addComponent(jTextField2)
                 .addGap(77, 77, 77))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1)
+                .addGap(94, 94, 94))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addGap(114, 114, 114))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1)
-                        .addGap(94, 94, 94))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, Short.MAX_VALUE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(113, 113, 113)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
@@ -120,7 +119,7 @@ public class TelaFinal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap())
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(416, 308));
@@ -130,9 +129,15 @@ public class TelaFinal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(!jTextField1.getText().isEmpty()) {
-            rk.setBD(jTextField1.getText(), Quiz.score);
-            new TelaInicial().setVisible(true);
-            this.dispose();
+            if (quiz.compareNick(jTextField1.getText())) {
+                rk.updateBD(jTextField1.getText(), Quiz.score);
+                new TelaInicial().setVisible(true);
+                this.dispose();
+            } else {
+                rk.setBD(jTextField1.getText(), Quiz.score);
+                new TelaInicial().setVisible(true);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
