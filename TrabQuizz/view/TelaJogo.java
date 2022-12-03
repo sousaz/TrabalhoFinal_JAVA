@@ -25,21 +25,21 @@ public class TelaJogo extends javax.swing.JFrame {
     private int nivel = TelaConf.nivel;
     private int quant = TelaConf.quant;
     private Quiz quiz = new Quiz();
-    private int thisQuestion;
+    private int numQuestion;
     
     public TelaJogo() {
         initComponents();
         this.setSize(720, 680);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        thisQuestion = 0;
-        jTextArea1.setText("Começar?");
+        numQuestion = 0;
+        jTextArea1.setText("Seleciona qualquer alternativa e clique em *next* para começar!");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setLineWrap(true);
-        jRadioButton1.setText("Sim");
-;       jRadioButton2.setText("Não");
-        jRadioButton3.setText("Não");
-        jRadioButton4.setText("Não");
+        jRadioButton1.setText("");
+;       jRadioButton2.setText("");
+        jRadioButton3.setText("");
+        jRadioButton4.setText("");
         quiz.getQuestion(tema, nivel, quant);
     }
     
@@ -69,6 +69,23 @@ public class TelaJogo extends javax.swing.JFrame {
             quiz.score(jRadioButton3.getText(), nivel);
         else if (jRadioButton4.isSelected())
             quiz.score(jRadioButton4.getText(), nivel);
+    }
+    
+    public void showCorrectQuestion() {
+        if (numQuestion >= 1) {
+            if (jRadioButton1.isSelected() && quiz.showCorrectQuestion(jRadioButton1.getText())) {
+                JOptionPane.showMessageDialog(null, "PARABENS você acertou!!");
+            } else if (jRadioButton2.isSelected() && quiz.showCorrectQuestion(jRadioButton2.getText())) {
+                quiz.showCorrectQuestion(jRadioButton2.getText());
+                JOptionPane.showMessageDialog(null, "PARABENS você acertou!!");
+            } else if (jRadioButton3.isSelected() && quiz.showCorrectQuestion(jRadioButton3.getText())) {
+                JOptionPane.showMessageDialog(null, "PARABENS você acertou!!");
+            } else if (jRadioButton4.isSelected() && quiz.showCorrectQuestion(jRadioButton4.getText())) {
+                JOptionPane.showMessageDialog(null, "PARABENS você acertou!!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Que pena você errou a reposta certa era: " +  quiz.getCorrect());
+            }
+        }
     }
 
     /**
@@ -180,18 +197,18 @@ public class TelaJogo extends javax.swing.JFrame {
         if (jRadioButton1.isSelected() || jRadioButton2.isSelected() || jRadioButton3.isSelected() || jRadioButton4.isSelected()) {
             try {
                 isSelect();
+                showCorrectQuestion();
                 NextQuestion();
                 cleanOption();
             } catch (Exception e) {
                 System.out.println("");
             } finally {
-                if (thisQuestion == quant) {
+                if (numQuestion == quant) {
                     new TelaFinal().setVisible(true);
-                    //this.setVisible(false);
                     this.dispose();
                 }
-                thisQuestion++;
-             }   
+                numQuestion++;
+            }   
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -4,6 +4,7 @@
  */
 package TrabQuizz.view;
 
+import TrabQuizz.model.dao.HistoricoDAO;
 import TrabQuizz.model.dao.RankingDAO;
 import trabQuizz.model.vo.Quiz;
 
@@ -26,6 +27,7 @@ public class TelaFinal extends javax.swing.JFrame {
     }
     private RankingDAO rk = new RankingDAO();
     private Quiz quiz = new Quiz();
+    private HistoricoDAO ht = new HistoricoDAO();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,6 +140,7 @@ public class TelaFinal extends javax.swing.JFrame {
                 new TelaInicial().setVisible(true);
                 this.dispose();
             }
+            ht.setBD(jTextField1.getText(), Quiz.score, TelaConf.tema, TelaConf.nivel, TelaConf.quant);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

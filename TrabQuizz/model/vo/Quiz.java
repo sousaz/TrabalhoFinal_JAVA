@@ -1,7 +1,9 @@
 package trabQuizz.model.vo;
 
+import TrabQuizz.model.bo.Historico;
 import TrabQuizz.model.bo.Questoes;
 import TrabQuizz.model.bo.Ranking;
+import TrabQuizz.model.dao.HistoricoDAO;
 import TrabQuizz.model.dao.RankingDAO;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,16 +12,22 @@ import trabQuizz.model.dao.QuestoesDAO;
 public class Quiz {
     
     
-    public ArrayList<Questoes> questoes = new ArrayList<>();
-    public ArrayList<String> alternatives = new ArrayList<>();
-    public ArrayList<Ranking> ranking = new ArrayList<>();
+    private ArrayList<Questoes> questoes = new ArrayList<>();
+    private ArrayList<String> alternatives = new ArrayList<>();
+    private ArrayList<Ranking> ranking = new ArrayList<>();
+    private ArrayList<Historico> historico = new ArrayList<>();
     public static int score;
     public static int corrects;
     private String correct;
 
     QuestoesDAO que = new QuestoesDAO();
     RankingDAO rkg = new RankingDAO();
+    HistoricoDAO ht = new HistoricoDAO();
     //Questoes qt = new Questoes();
+
+    public String getCorrect() {
+        return correct;
+    }
 
     
     
@@ -61,6 +69,15 @@ public class Quiz {
         System.out.println(score);
     }
     
+    public boolean showCorrectQuestion(String answer) {
+        if(answer.equals(correct)) {
+            System.out.println(answer);
+           return true;
+        }
+        
+        return false;
+    }
+    
     public ArrayList<Ranking> showRanking() {
         ranking = rkg.getBD();
         return ranking;
@@ -74,4 +91,10 @@ public class Quiz {
         }
         return false;
     }
+    
+    public ArrayList<Historico> showHistoric() {
+        historico = ht.getBD();
+        return historico;
+    }
+    
 }

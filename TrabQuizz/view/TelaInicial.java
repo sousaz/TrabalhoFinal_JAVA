@@ -45,6 +45,11 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         jButton2.setText("Histórico");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Ranking");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +113,12 @@ public class TelaInicial extends javax.swing.JFrame {
         new TelaConf().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_NewGameBActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new TelaHistorico().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
