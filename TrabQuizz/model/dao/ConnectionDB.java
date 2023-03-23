@@ -10,7 +10,7 @@ public class ConnectionDB {
     private static String driver = "com.mysql.cj.jdbc.Driver";
     private static String url = "jdbc:mysql://localhost/questoesbd";
     private static String usuario = "root";
-    private static String senha = "maequerida1";
+    private static String senha = "ablubeablube";
 
     public static Connection conectar() {
         Connection con = null;
